@@ -18,16 +18,20 @@
 	},
 	"homepage": "https://github.com/romainseb/reddit-upvotes-to-slack#readme",
 	"dependencies": {
+		"@r/api-client": "^3.37.0",
 		"babel-cli": "^6.26.0",
 		"babel-eslint": "^8.2.6",
 		"babel-preset-env": "^1.7.0",
+		"dotenv": "^6.0.0",
 		"eslint": "^5.2.0",
 		"eslint-config-airbnb": "^17.0.0",
 		"eslint-plugin-import": "^2.13.0",
 		"eslint-plugin-jsx-a11y": "^6.1.1",
 		"eslint-plugin-react": "^7.10.0",
 		"lodash": "^4.17.10",
-		"request": "^2.87.0",
-		"slack-node": "^0.1.8"
+		"node-fetch": "^2.2.0",
+		"slack-node": "^0.1.8",
+		"snoostorm": "^0.0.5",
+		"snoowrap": "^1.15.2"
 	}
 }
