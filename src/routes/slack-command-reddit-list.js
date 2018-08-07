@@ -1,10 +1,10 @@
 export default async (req, res) => {
 	const slackReqObj = req.body;
-	if (req.body.user_name !== 'sromain2') {
+	if (req.body.user_name !== 'sromain') {
 		const response = {
 			response_type: 'in_channel',
 			channel: slackReqObj.channel_id,
-			text: 'Hello, only @sromain could use me !',
+			text: 'Sorry, only @sromain could use me !',
 		};
 		return res.json(response);
 	}
