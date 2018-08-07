@@ -1,10 +1,9 @@
-import SLACK_USERNAME from '../env';
+import { SLACK_USERNAME } from '../env';
 import { getRedditSubs } from '../modules/reddit';
 
 export default async (req, res) => {
 	const slackReqObj = req.body;
 	if (req.body.user_name !== SLACK_USERNAME) {
-		console.log(req.body.user_name);
 		const response = {
 			response_type: 'in_channel',
 			channel: slackReqObj.channel_id,
