@@ -2,39 +2,9 @@ import express from 'express';
 
 import { log } from './utils';
 
-const router = new express.Router();
+import slackCommandRedditList from './routes/slack-command-reddit-list';
 
-router.post('/slack/command/reddit-list', async (req, res) => {
-	console.log(req.body);
-	try {
-		const slackReqObj = req.body;
-		const response = {
-			response_type: 'in_channel',
-			channel: slackReqObj.channel_id,
-			text: 'Hello :slightly_smiling_face:',
-			attachments: [
-				{
-					text: 'What report would you like to get?',
-					fallback: 'What report would you like to get?',
-					color: '#2c963f',
-					attachment_type: 'default',
-					callback_id: 'report_selection',
-					actions: [
-						{
-							name: 'reports_select_menu',
-							text: 'Choose a report...',
-							type: 'select',
-							options: [{ text: 'test', value: 'test2' }],
-						},
-					],
-				},
-			],
-		};
-		return res.json(response);
-	} catch (err) {
-		log.error(err);
-		return res.status(500).send("Something blew up. We're looking into it.");
-	}
-});
+const router = new express.Router();
+router.post('/slack/command/reddit-list', slackCommandRedditList);
 
 export default router;
