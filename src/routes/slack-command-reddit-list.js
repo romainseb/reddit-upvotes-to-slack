@@ -1,4 +1,5 @@
 import SLACK_USERNAME from '../env';
+import { getRedditSubs } from '../modules/reddit';
 
 export default async (req, res) => {
 	const slackReqObj = req.body;
@@ -12,6 +13,7 @@ export default async (req, res) => {
 	}
 
 	try {
+		const subs = await getRedditSubs();
 		const response = {
 			response_type: 'in_channel',
 			channel: slackReqObj.channel_id,
@@ -28,7 +30,7 @@ export default async (req, res) => {
 							name: 'reports_select_menu',
 							text: 'Choose a report...',
 							type: 'select',
-							options: [{ text: 'test', value: 'test2' }],
+							options: subs.map(sub => ({ text: sub, value: sub })),
 						},
 					],
 				},
