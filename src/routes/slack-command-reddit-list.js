@@ -1,6 +1,8 @@
+import SLACK_USERNAME from '../env';
+
 export default async (req, res) => {
 	const slackReqObj = req.body;
-	if (req.body.user_name !== 'sromain') {
+	if (req.body.user_name !== SLACK_USERNAME) {
 		const response = {
 			response_type: 'in_channel',
 			channel: slackReqObj.channel_id,
