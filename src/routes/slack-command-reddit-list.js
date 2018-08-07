@@ -4,7 +4,7 @@ import { getRedditSubs } from '../modules/reddit';
 export default async (req, res) => {
 	const slackReqObj = req.body;
 	if (req.body.user_name !== SLACK_USERNAME) {
-		log.error(req.body.user_name);
+		console.log(req.body.user_name);
 		const response = {
 			response_type: 'in_channel',
 			channel: slackReqObj.channel_id,
