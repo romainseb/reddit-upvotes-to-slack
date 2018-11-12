@@ -13,23 +13,23 @@ export default async (req, res) => {
     return res.json(response);
   }
 
-  const slack = new Slack(SLACK_TOKEN_API);
-  for (let i = 0; i < 10; i++) {
-    slack.api(
-      "chat.postMessage",
-      {
-        channel: slackReqObj.channel_id,
-        text: "tessst",
-        username: `PR MAN`,
-        link_names: "true",
-        icon_emoji: ":butler:",
-        as_user: true
-      },
-      function(err, response) {
-        console.log("DONE");
-      }
-    );
-  }
+  // const slack = new Slack(SLACK_TOKEN_API);
+  // for (let i = 0; i < 10; i++) {
+  //   slack.api(
+  //     "chat.postMessage",
+  //     {
+  //       channel: slackReqObj.channel_id,
+  //       text: "tessst",
+  //       username: `PR MAN`,
+  //       link_names: "true",
+  //       icon_emoji: ":butler:",
+  //       as_user: true
+  //     },
+  //     function(err, response) {
+  //       console.log(err, response, "DONE");
+  //     }
+  //   );
+  // }
 
   try {
     const subs = await getRedditSubs();
