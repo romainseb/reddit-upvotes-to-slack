@@ -15,29 +15,36 @@ export default async (req, res) => {
 
   try {
     const subs = await getRedditSubs();
-    const response = {
+
+    if (sub.length === 1) {
+      return res.json({
+        response_type: "ephemeral",
+        channel: slackReqObj.channel_id,
+        text: "There is no saved stuff"
+      });
+    }
+    return res.json({
       response_type: "ephemeral",
       channel: slackReqObj.channel_id,
       text: "Hello :slightly_smiling_face:",
       attachments: [
         {
-          text: "What report would you like to get?",
-          fallback: "What report would you like to get?",
+          text: "What sub do you want ?",
+          fallback: "What sub do you want ?",
           color: "#2c963f",
           attachment_type: "default",
           callback_id: "report_selection",
           actions: [
             {
               name: "reports_select_menu",
-              text: "Choose a report...",
+              text: "Choose a sub...",
               type: "select",
               options: subs.map(sub => ({ text: sub, value: sub }))
             }
           ]
         }
       ]
-    };
-    return res.json(response);
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).send("Something blew up. We're looking into it.");
