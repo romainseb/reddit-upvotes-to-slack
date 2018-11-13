@@ -15,37 +15,36 @@ export default async (req, res) => {
 
   const subs = await getRedditSubs();
   const slack = new Slack(SLACK_TOKEN_API);
-    slack.api(
-      "chat.postEphemeral",
-      {
-        channel: slackReqObj.channel_id,
-        text: "Reddit sub ?",
-        username: `PR MAN`,
-        link_names: "true",
-        as_user: true,
-        attachments: [
-          {
-            text: "What report would you like to get?",
-            fallback: "What report would you like to get?",
-            color: "#2c963f",
-            attachment_type: "default",
-            callback_id: "report_selection",
-            actions: [
-              {
-                name: "reports_select_menu",
-                text: "Choose a report...",
-                type: "select",
-                options: subs.map(sub => ({ text: sub, value: sub }))
-              }
-            ]
-          }
-      },
-      function(err, response) {
-        console.log(err, response, "DONE");
-      }
-    );
-  }
-
+  slack.api(
+    "chat.postEphemeral",
+    {
+      channel: slackReqObj.channel_id,
+      text: "Reddit sub ?",
+      username: `PR MAN`,
+      link_names: "true",
+      as_user: true,
+      attachments: [
+        {
+          text: "What report would you like to get?",
+          fallback: "What report would you like to get?",
+          color: "#2c963f",
+          attachment_type: "default",
+          callback_id: "report_selection",
+          actions: [
+            {
+              name: "reports_select_menu",
+              text: "Choose a report...",
+              type: "select",
+              options: subs.map(sub => ({ text: sub, value: sub }))
+            }
+          ]
+        }
+      ]
+    },
+    function(err, response) {
+      console.log(err, response, "DONE");
+    }
+  );
   /*
   try {
     const response = {
@@ -71,9 +70,9 @@ export default async (req, res) => {
       ]
     };
     */
-    // return res.json(response);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send("Something blew up. We're looking into it.");
-  }
+  // return res.json(response);
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(500).send("Something blew up. We're looking into it.");
+  // }
 };
