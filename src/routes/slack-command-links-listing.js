@@ -26,10 +26,10 @@ export default async (req, res) => {
     slack.api(
       "chat.postMessage",
       {
-        channel: slackReqObj.channel_id,
+        channel: slackReqObj.channel.id,
         text: link,
-        link_names: "true",
-        as_user: true
+        as_user: true,
+        unfurl_links: false
       },
       function(err, response) {
         console.log("DONE");
