@@ -28,7 +28,7 @@ export default async (req, res) => {
       {
         channel: slackReqObj.channel.id,
         text: link,
-        as_user: true,
+        as_user: false,
         unfurl_links: false,
         username: `Daily Reddit`,
         icon_emoji: ":reddit:"
