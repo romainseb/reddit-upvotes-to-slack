@@ -19,10 +19,10 @@ export default async (req, res) => {
       ? undefined
       : slackReqObj.actions[0].selected_options[0].value;
 
-  const links = getRedditLinks(sub);
+  const links = await getRedditLinks(sub);
 
   const slack = new Slack(SLACK_TOKEN_API);
-  links.array.forEach(link => {
+  links.forEach(link => {
     slack.api(
       "chat.postMessage",
       {
