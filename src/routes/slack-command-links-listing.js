@@ -1,6 +1,6 @@
 import Slack from "slack-node";
 import { SLACK_USERNAME, SLACK_TOKEN_API } from "../env";
-import { getRedditSubs } from "../modules/reddit";
+import { getRedditSubs, removeSaves } from "../modules/reddit";
 import { ALL_SUBS, getRedditLinks } from "../modules/reddit";
 
 export default async (req, res) => {
@@ -36,6 +36,8 @@ export default async (req, res) => {
       }
     );
   });
+
+  await removeSaves(sub);
 
   try {
     const subs = await getRedditSubs();
