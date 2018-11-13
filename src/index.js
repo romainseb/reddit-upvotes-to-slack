@@ -3,11 +3,11 @@ import "babel-polyfill";
 import config from "config";
 import express from "express";
 import http from "http";
-
 import bootstrap from "./bootstrap";
 import { log, normalizePort } from "./utils";
 
 const app = express();
+
 app.start = async () => {
   const port = normalizePort(config.get("port"));
   app.set("port", port);
