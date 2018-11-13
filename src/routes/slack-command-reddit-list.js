@@ -16,7 +16,7 @@ export default async (req, res) => {
   try {
     const subs = await getRedditSubs();
 
-    if (sub.length === 1) {
+    if (subs.length === 1) {
       return res.json({
         response_type: "ephemeral",
         channel: slackReqObj.channel_id,
