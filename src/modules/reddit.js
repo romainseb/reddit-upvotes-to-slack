@@ -40,7 +40,7 @@ export async function getRedditLinks(sub) {
 
   return items
     .sort((a, b) => a.permalink.localeCompare(b.permalink))
-    .map(item => `https://reddit.com/${item.permalink}`);
+    .map(item => `https://reddit.com${item.permalink}`);
 }
 
 export async function removeSaves(sub) {
