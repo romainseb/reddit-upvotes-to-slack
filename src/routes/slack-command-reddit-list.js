@@ -20,7 +20,7 @@ export default async (req, res) => {
     {
       channel: slackReqObj.channel_id,
       text: "Reddit sub ?",
-      username: `PR MAN`,
+      username: req.body.user_name,
       link_names: "true",
       as_user: true,
       attachments: [
