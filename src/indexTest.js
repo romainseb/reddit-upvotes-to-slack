@@ -1,8 +1,10 @@
-import { getRedditSubs } from './modules/reddit';
+import { getRedditSubs, getRedditLinks, removeAllFav } from "./modules/reddit";
 
 async function main() {
-	const subs = await getRedditSubs();
-	console.log(subs);
+  // removeAllFav();
+  // const subs = await getRedditSubs();
+  // const subs = await getRedditLinks();
+  // console.log(subs);
 }
 
 main();

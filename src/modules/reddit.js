@@ -3,6 +3,7 @@ import { CLIENT_ID, CLIENT_SECRET, REDDIT_PASS, REDDIT_USER } from "../env";
 require("dotenv").config();
 const Snoowrap = require("snoowrap");
 const Snoostorm = require("snoostorm");
+const ALL_SUBS = "All of them";
 
 const r = new Snoowrap({
   userAgent: "reddit-bot-example-node",
@@ -17,19 +18,35 @@ function uniqueFilter(item, pos, a) {
   return a.indexOf(item) === pos;
 }
 
-export async function getRedditSubs() {
+async function getFav() {
   const array = await r.getMe().getSavedContent();
+  return array.toJSON();
+}
+
+export async function getRedditSubs() {
+  const array = await getFav();
   return array
     .map(redditLink => redditLink.subreddit_name_prefixed)
     .filter(uniqueFilter)
-    .sort();
+    .concat([ALL_SUBS])
+    .sort((a, b) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase()));
 }
 
-function getRedditLinks() {
-  return r
-    .getMe()
-    .getSavedContent()
-    .then(content => content.map(redditLink => redditLink.id));
+export async function getRedditLinks(sub) {
+  let items = await getFav();
+  if (sub) {
+    items = items.filter(item => sub === item.subreddit_name_prefixed);
+  }
+
+  return items
+    .sort((a, b) => a.permalink.localeCompare(b.permalink))
+    .map(item => `https://reddit.com/${item.permalink}`);
 }
 
-export default getRedditLinks;
+export async function removeSaves(sub) {
+  let items = await r.getMe().getSavedContent();
+  if (sub) {
+    items = items.filter(item => sub === item.subreddit_name_prefixed);
+  }
+  items.forEach(item => item.unsave());
+}
